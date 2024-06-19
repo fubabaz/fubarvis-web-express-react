@@ -10,12 +10,15 @@ function App() {
       <div className="container">
         {/* 사이드바 */}
         <nav className="sidebar">
+          <div className="logo-container">
+              <img src="https://avatars.githubusercontent.com/u/28587109?s=200&v=4" alt="Logo" className="logo"/>
+          </div>
           <ul>
-            <li>
-              <a href="/">Home</a>
+          < li>
+              <a href="/users">맴버프로필</a>
             </li>
             <li>
-              <a href="/users">Users</a>
+              <a href="/">개인알고리즘</a>
             </li>
           </ul>
         </nav>
