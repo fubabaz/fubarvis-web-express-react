@@ -3,8 +3,12 @@ import React from 'react';
 function HomePage() {
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the Home Page!</p>
+      <div className="m-4">
+      <h3>개인알고리즘</h3>
+      </div>
+    
+      <div className="user-list row content">      
+      </div>
     </div>
   );
 }

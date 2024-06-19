@@ -6,13 +6,13 @@ const UserProfileCard = ({ user,col }) => {
 
   return (
     <div className={cardClasses}>
-        <div class="row">
+        <div className="row">
  
-      <div class="col-md-2">
-      <img size="32" height="32" width="32" src={user.image} className="rounded-circle user-avatar" alt="User Avatar" />
+      <div className="col-md-2">
+        <img size="32" height="32" width="32" src={user.image} className="rounded-circle user-avatar" alt="User Avatar" />
       </div>
  
-      <div class="col-md-9">
+      <div className="col-md-9">
         <span>{user.github_id}</span>
       </div>
       </div>
@@ -31,7 +31,7 @@ const UserProfileCard = ({ user,col }) => {
     </div>
   );
 };
-
+/*
 UserProfileCard.propTypes = {
   user: PropTypes.shape({
     avatar: PropTypes.string.isRequired,
@@ -40,5 +40,6 @@ UserProfileCard.propTypes = {
     joinedDate: PropTypes.string.isRequired,
   }).isRequired,
 };
+*/
 
 export default UserProfileCard;

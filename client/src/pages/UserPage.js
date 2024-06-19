@@ -16,12 +16,12 @@ function UserPage() {
   return (
     <div>
       <div className="m-4">
-      <h3>User Page</h3>
+      <h3>맴버 프로필</h3>
       </div>
       <PerfectScrollbar options={{ suppressScrollX: true }}>
       <div className="user-list row content">
         {users.map((user) => (
-          <UserProfileCard key={user.id} user={user} col={3} />
+          <UserProfileCard key={user.baekjoon_id} user={user} col={3} />
         ))}
       </div>
       </PerfectScrollbar>
