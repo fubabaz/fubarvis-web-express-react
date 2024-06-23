@@ -29,9 +29,9 @@ body{
 
 .sidebar {
   flex: 0 0 150px;
-  background-color: #223c71;
   padding: 20px;
   border-right: 1px solid #e0e0e0;
+  font-size:14px;
 }
 
 .content {
@@ -51,7 +51,7 @@ body{
 
 .sidebar ul li a {
   text-decoration: none; /* 링크 밑줄 제거 */
-  color: #ffffff; /* 링크 색상 */
+  color: #000; /* 링크 색상 */
   font-weight: 410; /* 글꼴 두껍게 */
 }
 
