@@ -9,6 +9,7 @@ function UserPage() {
   useEffect(() => {
     // 페이지가 로드될 때 한 번만 유저 정보를 가져옴
     UserService.getUsers().then((data) => {
+      console.log(data)
       setUsers(data);
     });
   }, []);
@@ -21,7 +22,7 @@ function UserPage() {
       <PerfectScrollbar options={{ suppressScrollX: true }}>
       <div className="user-list row content">
         {users.map((user) => (
-          <UserProfileCard key={user.baekjoon_id} user={user} col={3} />
+          <UserProfileCard key={user.baekjoon_id} user={user} col={4} />
         ))}
       </div>
       </PerfectScrollbar>

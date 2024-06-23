@@ -58,3 +58,7 @@ body{
 .sidebar ul li a:hover {
   color: #6dceff; /* 호버시 링크 색상 변경 */
 }
+
+.react-activity-calendar__calendar{
+  margin:3px;
+}

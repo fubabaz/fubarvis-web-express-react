@@ -18,7 +18,7 @@ function App() {
               <a href="/users">맴버프로필</a>
             </li>
             <li>
-              <a href="/">개인알고리즘</a>
+              <a href="/users">개인알고리즘</a>
             </li>
           </ul>
         </nav>
@@ -26,7 +26,7 @@ function App() {
         {/* 메인 콘텐츠 */}
         <main >
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<UserPage />} />
             <Route path="/users" element={<UserPage />} />
           </Routes>
         </main>
