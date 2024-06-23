@@ -4,7 +4,7 @@ import GitHubCalendar from "react-github-calendar";
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
 import solvedLogo from "../assets/img/logo/solved-logo.png";
 import tistoryLogo from "../assets/img/logo/tistory-logo.gif";
-
+import throphyIcon from "../assets/img/icon/trophy.png";
 const UserProfileCard = ({ user, col }) => {
   const cardClasses = ` bg-white rounded border-0 card p-2 my-3  ${
     col ? `col-${col}` : ""
@@ -26,6 +26,21 @@ const UserProfileCard = ({ user, col }) => {
         <div className="d-flex align-items-center">
           <span style={{ fontWeight: "410" }}>{user.github_id}</span>
         </div>
+       
+        {user.trophy_cnt && (
+            <div className="d-flex align-items-center mx-3">
+          <img
+            height="25"
+            width="25"
+            src={throphyIcon}
+            className="ml-3 rounded-circle user-avatar"
+            alt="Trophy Icon"
+          />
+          <span className="ml-0 text-primary" style={{ fontWeight: "410" }}>
+              {user.trophy_cnt}
+            </span>
+            </div>
+        )}
       </div>
       <div className="card-body shadow-sm">
         <GitHubCalendar
