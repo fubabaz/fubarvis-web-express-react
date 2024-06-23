@@ -21,6 +21,9 @@ app.use(express.urlencoded({ extended: false })); // URL 인코딩 파싱
 const usersRouter = require('./routes/users');
 app.use('/api/users', usersRouter);
 
+const algorithmRouter = require('./routes/algorithm');
+app.use('/api/algorithm', algorithmRouter);
+
 // 서버 시작
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
