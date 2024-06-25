@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AlgorithmService from '../services/algorithmService';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css'; // PerfectScrollbar CSS 파일 로드
+import throphyIcon from "../assets/img/icon/trophy.png";
 
 function AlgorithmPage() {
   const [problems, setAlgorithm] = useState([]);
@@ -28,6 +29,9 @@ function AlgorithmPage() {
                   <th className="col-2">제출자</th>
                   <th className="col-1">번호</th>
                   <th className="col">문제</th>
+                  <th className="col">메모리</th>
+                  <th className="col">수행시간</th>
+                  <th className="col">코드길이</th>
                 </tr>
               </thead>
               <tbody style={{ fontSize: "13px" }}>
@@ -35,18 +39,96 @@ function AlgorithmPage() {
                   <tr key={index}>
                     <td>{index}</td>
                     <td>
-                      {problem.image && (
+                      {problem.submitter_image && (
                         <img
                           height="28"
                           width="28"
-                          src={problem.image}
-                          className="mx-2 mb-1 rounded-circle user-avatar"
+                          src={problem.submitter_image}
+                          className="mx-2 mb-1 rounded user-avatar"
                           alt="User Avatar"
                         />
                       )}                    
                     </td>
                     <td>{problem.prob_no}</td>
                     <td>{problem.prob_title}</td>
+                    <td>
+                      {problem.min_memory_image && (
+                        <div style={{ position: "relative", display: "inline-block" }}>
+                          <img
+                            height="28"
+                            width="28"
+                            src={problem.min_memory_image}
+                            className="rounded user-avatar"
+                            alt="User Avatar"
+                          />
+                          <img
+                            height="18"
+                            width="18"
+                            src={throphyIcon}
+                            className="rounded-circle"
+                            alt="Trophy Icon"
+                            style={{
+                              position: "absolute",
+                              bottom: "0",
+                              right: "0",
+                              transform: "translate(50%, 50%)"
+                            }}
+                          />
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      {problem.min_time_image && (
+                        <div style={{ position: "relative", display: "inline-block" }}>
+                        <img
+                          height="28"
+                          width="28"
+                          src={problem.min_time_image}
+                          className="rounded user-avatar"
+                          alt="User Avatar"
+                        />
+                        <img
+                          height="18"
+                          width="18"
+                          src={throphyIcon}
+                          className="rounded-circle"
+                          alt="Trophy Icon"
+                          style={{
+                            position: "absolute",
+                            bottom: "0",
+                            right: "0",
+                            transform: "translate(50%, 50%)"
+                          }}
+                        />
+                      </div>
+                      )}                    
+                    </td>
+                    <td>
+                      {problem.min_code_len_image && (
+                        <div style={{ position: "relative", display: "inline-block" }}>
+                        <img
+                          height="28"
+                          width="28"
+                          src={problem.min_code_len_image}
+                          className="rounded user-avatar"
+                          alt="User Avatar"
+                        />
+                        <img
+                          height="18"
+                          width="18"
+                          src={throphyIcon}
+                          className="rounded-circle"
+                          alt="Trophy Icon"
+                          style={{
+                            position: "absolute",
+                            bottom: "0",
+                            right: "0",
+                            transform: "translate(50%, 50%)"
+                          }}
+                        />
+                      </div>
+                      )}                    
+                    </td>
                   </tr>
                 ))}
               </tbody>

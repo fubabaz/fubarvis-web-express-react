@@ -19,6 +19,7 @@ const UserProfileCard = ({ user, col }) => {
   return (
     <>
       <div className={cardClasses}>
+        <div className="card-body shadow-sm">
         <div className="d-flex justify-content-start">
           <div>
             <img
@@ -26,7 +27,7 @@ const UserProfileCard = ({ user, col }) => {
               height="32"
               width="32"
               src={user.image}
-              className="mx-3 rounded-circle user-avatar"
+              className="mx-2 mb-1 rounded-circle user-avatar"
               alt="User Avatar"
             />
           </div>
@@ -54,7 +55,7 @@ const UserProfileCard = ({ user, col }) => {
             </div>
           )}
         </div>
-        <div className="card-body shadow-sm">
+
           <GitHubCalendar
             hideMonthLabels={true}
             hideTotalCount={false}
