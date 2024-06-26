@@ -63,3 +63,13 @@ body{
 .react-activity-calendar__calendar{
   margin:3px;
 }
+
+.flourish-credit{
+display: none;
+}
+
+
+
+.hr-container hr {
+  border-top: 1px solid #b6b6b6;
+}

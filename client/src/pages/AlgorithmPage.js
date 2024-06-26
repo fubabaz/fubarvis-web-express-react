@@ -50,7 +50,8 @@ function AlgorithmPage() {
                       )}                    
                     </td>
                     <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
-                    <td><img src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
+                    <td><img height="20"
+                            width="20" className="rounded" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
                       {problem.prob_title}</td>
                     <td>
                       {problem.min_memory_image && (

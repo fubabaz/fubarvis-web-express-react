@@ -67,4 +67,32 @@ ORDER BY
 
 
 
+router.get('/individual', async (req, res) => {
+    try {
+      const query = `
+      SELECT * FROM (
+        SELECT BAEKJOON_ID,
+                   SOL_PROB_CNT,
+                 ROW_NUMBER() OVER(PARTITION BY BAEKJOON_ID ORDER BY BAEKJOON_ID, BASE_DT DESC) AS RN
+          FROM RANKING_INFORMATION
+          WHERE ACCOUNT_TYPE = 'I'
+          ) INFO INNER JOIN MEMBER MB
+          ON INFO.BAEKJOON_ID = MB.BAEKJOON_ID
+          AND MB.DEL_YN ='N'
+          WHERE INFO.RN = 1
+          ORDER BY SOL_PROB_CNT DESC
+      `;
+      
+      const { rows } = await db.query(query);
+      res.json(rows);
+    } catch (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+module.exports = router;
+
+
 module.exports = router;
