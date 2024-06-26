@@ -28,15 +28,15 @@ function AlgorithmPage() {
                   <th className="col-1">#</th>
                   <th className="col-2">제출자</th>
                   <th className="col-1">번호</th>
-                  <th className="col">문제</th>
-                  <th className="col">메모리</th>
-                  <th className="col">수행시간</th>
-                  <th className="col">코드길이</th>
+                  <th className="col-2">문제</th>
+                  <th className="col-2">메모리</th>
+                  <th className="col-2">수행시간</th>
+                  <th className="col-2">코드길이</th>
                 </tr>
               </thead>
               <tbody style={{ fontSize: "13px" }}>
                 {problems.map((problem, index) => (
-                  <tr key={index}>
+                  <tr className='align-middle' key={index}>
                     <td>{index}</td>
                     <td>
                       {problem.submitter_image && (
@@ -49,8 +49,9 @@ function AlgorithmPage() {
                         />
                       )}                    
                     </td>
-                    <td>{problem.prob_no}</td>
-                    <td>{problem.prob_title}</td>
+                    <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
+                    <td><img src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
+                      {problem.prob_title}</td>
                     <td>
                       {problem.min_memory_image && (
                         <div style={{ position: "relative", display: "inline-block" }}>
