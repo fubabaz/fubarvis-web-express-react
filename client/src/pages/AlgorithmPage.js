@@ -13,7 +13,7 @@ function AlgorithmPage() {
       setAlgorithm(data);
     });
   }, []);
-  
+
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <div className="m-4">
@@ -47,11 +47,10 @@ function AlgorithmPage() {
                           className="mx-2 mb-1 rounded user-avatar"
                           alt="User Avatar"
                         />
-                      )}                    
+                      )}
                     </td>
                     <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
-                    <td><img height="20"
-                            width="20" className="rounded" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
+                    <td><img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
                       {problem.prob_title}</td>
                     <td>
                       {problem.min_memory_image && (
@@ -82,54 +81,54 @@ function AlgorithmPage() {
                     <td>
                       {problem.min_time_image && (
                         <div style={{ position: "relative", display: "inline-block" }}>
-                        <img
-                          height="28"
-                          width="28"
-                          src={problem.min_time_image}
-                          className="rounded user-avatar"
-                          alt="User Avatar"
-                        />
-                        <img
-                          height="18"
-                          width="18"
-                          src={throphyIcon}
-                          className="rounded-circle"
-                          alt="Trophy Icon"
-                          style={{
-                            position: "absolute",
-                            bottom: "0",
-                            right: "0",
-                            transform: "translate(50%, 50%)"
-                          }}
-                        />
-                      </div>
-                      )}                    
+                          <img
+                            height="28"
+                            width="28"
+                            src={problem.min_time_image}
+                            className="rounded user-avatar"
+                            alt="User Avatar"
+                          />
+                          <img
+                            height="18"
+                            width="18"
+                            src={throphyIcon}
+                            className="rounded-circle"
+                            alt="Trophy Icon"
+                            style={{
+                              position: "absolute",
+                              bottom: "0",
+                              right: "0",
+                              transform: "translate(50%, 50%)"
+                            }}
+                          />
+                        </div>
+                      )}
                     </td>
                     <td>
                       {problem.min_code_len_image && (
                         <div style={{ position: "relative", display: "inline-block" }}>
-                        <img
-                          height="28"
-                          width="28"
-                          src={problem.min_code_len_image}
-                          className="rounded user-avatar"
-                          alt="User Avatar"
-                        />
-                        <img
-                          height="18"
-                          width="18"
-                          src={throphyIcon}
-                          className="rounded-circle"
-                          alt="Trophy Icon"
-                          style={{
-                            position: "absolute",
-                            bottom: "0",
-                            right: "0",
-                            transform: "translate(50%, 50%)"
-                          }}
-                        />
-                      </div>
-                      )}                    
+                          <img
+                            height="28"
+                            width="28"
+                            src={problem.min_code_len_image}
+                            className="rounded user-avatar"
+                            alt="User Avatar"
+                          />
+                          <img
+                            height="18"
+                            width="18"
+                            src={throphyIcon}
+                            className="rounded-circle"
+                            alt="Trophy Icon"
+                            style={{
+                              position: "absolute",
+                              bottom: "0",
+                              right: "0",
+                              transform: "translate(50%, 50%)"
+                            }}
+                          />
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}

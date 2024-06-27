@@ -74,6 +74,7 @@ router.get('/individual', async (req, res) => {
         SELECT BAEKJOON_ID,
                    SOL_PROB_CNT,
                    RANKING,
+                   PROBLEMS,
                    CASE WHEN UPPER(LEV) !='UNRATED' THEN (SUBSTRING(SPLIT_PART(LEV, ' ', 1),1,1)||CASE 
                    WHEN  SPLIT_PART(LEV, ' ', 2) = 'I' THEN '1'
                    WHEN  SPLIT_PART(LEV, ' ', 2) = 'II' THEN '2'

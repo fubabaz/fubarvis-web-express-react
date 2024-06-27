@@ -7,6 +7,7 @@ import solvedLogo from "../assets/img/logo/solved-logo.png";
 
 function HomePage() {
   const [individual, setIndividual] = useState([]);
+  const [selectedProblems, setSelectedProblems] = useState([]); // State for selected problems
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -24,19 +25,30 @@ function HomePage() {
     };
   }, []);
 
+  const handleCardClick = (problems) => {
+    if (problems) {
+      setSelectedProblems(problems.split(" ")); // Split problems by space and set the state
+    } else {
+      setSelectedProblems([]);
+    }
+  };
+
+
   return (
     <div>
       <div className="m-4">
         <h3>개인알고리즘</h3>
       </div>
 
-      <div className=" row  content">
+      <div className="row content">
         <div className="col-3" style={{ height: "calc(100vh - 150px)" }}>
           <PerfectScrollbar>
             {individual.map((data, index) => (
-              <div class="card mb-3 me-3 bg-white rounded border-0 card">
+              <div key={index}
+                onClick={() => handleCardClick(data.problems)} // Click handler 
+                className="card mb-3 me-3 bg-white rounded border-0 card">
                 <div
-                  class="card-body shadow-sm"
+                  className="card-body shadow-sm"
                   style={{
                     border: "1px solid #f7f7f7",
                     borderRadius: "2px",
@@ -83,11 +95,21 @@ function HomePage() {
             ))}
           </PerfectScrollbar>
         </div>
-
-        <div
-          className="col-9 flourish-embed flourish-chart"
-          data-src="visualisation/11965768"
-        />
+        <div className="col-9" style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}>
+          <PerfectScrollbar>
+            <div id="problems" className="mx-2" style={{ fontSize: '12px', display: 'flex', flexWrap: 'wrap' }}>
+              {selectedProblems.map((problem, index) => (
+                <small key={index} className="problem me-1">
+                  <a href={`https://www.acmicpc.net/problem/${problem}`} target="_blank">{problem}</a>
+                </small>
+              ))}
+            </div>
+            <div
+              className="flourish-embed flourish-chart"
+              data-src="visualisation/11965768"
+            />
+          </PerfectScrollbar>
+        </div>
       </div>
     </div>
   );
