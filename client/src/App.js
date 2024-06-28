@@ -24,7 +24,7 @@ function App() {
           </ul>
           <div class="hr-container">
             <small className="text-start text-muted">활동</small>
-            <hr className='my-1'/>
+            <hr className='my-1' />
           </div>
           <ul>
             <li>
@@ -33,6 +33,28 @@ function App() {
             <li>
               <a href="/algorithm">주간알고리즘</a>
             </li>
+            <li>
+              <a href="#" disabled style={{ color: '#cfcfcf' }}>월간포스팅 </a>
+            </li>
+            <li>
+              <a href="#" disabled style={{ color: '#cfcfcf' }}>프로필매치업</a>
+            </li>
+          </ul>
+
+          <div class="hr-container">
+            <small className="text-start text-muted">토이프로젝트</small>
+            <hr className='my-1' />
+          </div>
+          <ul>
+            <li>
+              <a href="#" disabled style={{ color: '#cfcfcf' }}>fubarvis-web-express-react
+              </a>
+            </li>
+            <li>
+              <a href="#" disabled style={{ color: '#cfcfcf' }}>fubarvis-slack-bot
+              </a>
+            </li>
+
           </ul>
         </nav>
 
