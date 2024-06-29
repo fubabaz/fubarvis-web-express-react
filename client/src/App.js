@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
 import PersonalAlgorithmPage from './pages/PersonalAlgorithmPage';
 import AlgorithmPage from './pages/AlgorithmPage';
