@@ -20,12 +20,6 @@ function HomePage() {
       setIndividual(data);
     });
 
-    AlgorithmService.group().then((data) => {
-      console.log(data);
-      setSelectedProblems(data[0].problems.split(" ")); 
-    });
-
-
     return () => {
       document.body.removeChild(script); // 컴포넌트 언마운트 시 스크립트 제거
     };
@@ -103,17 +97,17 @@ function HomePage() {
         </div>
         <div className="col-9" style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}>
           <PerfectScrollbar>
-            <div
-              className="flourish-embed flourish-chart"
-              data-src="visualisation/11965768"
-            />
-              <div id="problems" className="mx-2" style={{ fontSize: '12px', display: 'flex', flexWrap: 'wrap' }}>
+            <div id="problems" className="mx-2" style={{ fontSize: '12px', display: 'flex', flexWrap: 'wrap' }}>
               {selectedProblems.map((problem, index) => (
                 <small key={index} className="problem me-1">
                   <a href={`https://www.acmicpc.net/problem/${problem}`} target="_blank">{problem}</a>
                 </small>
               ))}
             </div>
+            <div
+              className="flourish-embed flourish-chart"
+              data-src="visualisation/11965768"
+            />
           </PerfectScrollbar>
         </div>
       </div>

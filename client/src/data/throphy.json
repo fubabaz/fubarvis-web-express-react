@@ -1,0 +1,86 @@
+[
+	{
+		"prob_no" : "1074",
+		"prob_title" : "Z",
+		"trophy_type" : "Memory",
+		"baekjoon_id" : "qsdd0122",
+		"count" : 1
+	},
+	{
+		"prob_no" : "1074",
+		"prob_title" : "Z",
+		"trophy_type" : "Short Code",
+		"baekjoon_id" : "dgyang",
+		"count" : 1
+	},
+	{
+		"prob_no" : "1074",
+		"prob_title" : "Z",
+		"trophy_type" : "Time",
+		"baekjoon_id" : "qsdd0122",
+		"count" : 1
+	},
+	{
+		"prob_no" : "15998",
+		"prob_title" : "카카오머니",
+		"trophy_type" : "Memory",
+		"baekjoon_id" : "zeroradish",
+		"count" : 1
+	},
+	{
+		"prob_no" : "15998",
+		"prob_title" : "카카오머니",
+		"trophy_type" : "Short Code",
+		"baekjoon_id" : "hwangdj",
+		"count" : 1
+	},
+	{
+		"prob_no" : "15998",
+		"prob_title" : "카카오머니",
+		"trophy_type" : "Time",
+		"baekjoon_id" : "hwangdj",
+		"count" : 1
+	},
+	{
+		"prob_no" : "2659",
+		"prob_title" : "십자카드 문제",
+		"trophy_type" : "Memory",
+		"baekjoon_id" : "dgyang",
+		"count" : 1
+	},
+	{
+		"prob_no" : "2659",
+		"prob_title" : "십자카드 문제",
+		"trophy_type" : "Short Code",
+		"baekjoon_id" : "dgyang",
+		"count" : 1
+	},
+	{
+		"prob_no" : "2659",
+		"prob_title" : "십자카드 문제",
+		"trophy_type" : "Time",
+		"baekjoon_id" : "dgyang",
+		"count" : 1
+	},
+	{
+		"prob_no" : "3019",
+		"prob_title" : "테트리스",
+		"trophy_type" : "Memory",
+		"baekjoon_id" : "zeroradish",
+		"count" : 1
+	},
+	{
+		"prob_no" : "3019",
+		"prob_title" : "테트리스",
+		"trophy_type" : "Short Code",
+		"baekjoon_id" : "zeroradish",
+		"count" : 1
+	},
+	{
+		"prob_no" : "3019",
+		"prob_title" : "테트리스",
+		"trophy_type" : "Time",
+		"baekjoon_id" : "zeroradish",
+		"count" : 1
+	}
+]

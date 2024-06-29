@@ -66,6 +66,13 @@ const UserProfileCard = ({ user, col }) => {
             fontSize={10}
             username={user.github_id}
           />
+           <div className="image-container">
+      <img 
+        src={`https://github-readme-stats.vercel.app/api?username=${user.github_id}&count_private=true&theme=graywhite&show_icons=true`}
+        alt="GitHub Stats" 
+        className="cropped-image"
+      />
+    </div>
           <p className="card-text mb-1" style={{ fontSize: "13px" }}>
             <small className="text-muted">{user.joinedDate}</small>
           </p>

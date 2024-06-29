@@ -22,9 +22,9 @@ function App() {
               <a href="/users">맴버프로필</a>
             </li>
           </ul>
-          <div class="hr-container">
+          <div className="hr-container">
             <small className="text-start text-muted">활동</small>
-            <hr className='my-1' />
+            <hr className='my-1'/>
           </div>
           <ul>
             <li>
@@ -32,7 +32,7 @@ function App() {
             </li>
             <li>
               <a href="/algorithm">주간알고리즘</a>
-            </li>
+            </li> 
             <li>
               <a href="#" disabled style={{ color: '#cfcfcf' }}>월간포스팅 </a>
             </li>

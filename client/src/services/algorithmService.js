@@ -1,8 +1,8 @@
-const API_URL = '/api';
+const API_URL = '/api/algorithm';
 
 const getProb = async () => {
   try {
-    const response = await fetch(`${API_URL}/algorithm`);
+    const response = await fetch(`${API_URL}`);
     if (!response.ok) {
       throw new Error('Failed to fetch users');
     }
@@ -15,20 +15,7 @@ const getProb = async () => {
 
 const individual = async () => {
   try {
-    const response = await fetch(`${API_URL}/algorithm/individual`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch users');
-    }
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    throw error;
-  }
-};
-
-const group = async () => {
-  try {
-    const response = await fetch(`${API_URL}/algorithm/group`);
+    const response = await fetch(`${API_URL}/individual`);
     if (!response.ok) {
       throw new Error('Failed to fetch users');
     }
@@ -43,5 +30,4 @@ const group = async () => {
 export default {
     getProb,
     individual,
-    group,
 };

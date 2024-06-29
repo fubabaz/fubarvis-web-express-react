@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
-import { fetchTrophyData } from "../../services/userService"; //
 import throphyIcon from "../../assets/img/icon/trophy.png";
+import trophyData from '../../data/throphy.json';
 
 const TrophyModal = ({ show, handleClose, baekjoonId, image }) => {
-  const [trophyData, setTrophyData] = useState(null);
+  const [filteredTrophyData, setFilteredTrophyData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTrophy = async () => {
       setLoading(true);
       try {
-        const data = await fetchTrophyData(baekjoonId);
-        console.log(data);
-        setTrophyData(data);
+        // 필터링된 데이터를 상태에 저장
+        const filtered = trophyData.filter(data => data.baekjoon_id === baekjoonId);
+        setFilteredTrophyData(filtered);
+        console.log(filtered);
       } catch (error) {
         console.error("Error fetching trophy data:", error);
       } finally {
@@ -45,9 +46,9 @@ const TrophyModal = ({ show, handleClose, baekjoonId, image }) => {
       <Modal.Body>
         {loading ? (
           <p>Loading...</p>
-        ) : trophyData ? (
+        ) : filteredTrophyData.length > 0 ? (
           <>
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -57,7 +58,7 @@ const TrophyModal = ({ show, handleClose, baekjoonId, image }) => {
                 </tr>
               </thead>
               <tbody style={{ fontSize: "13px" }}>
-                {trophyData.map((trophy, index) => (
+                {filteredTrophyData.map((trophy, index) => (
                   <tr key={index}>
                     <td>
                       <img
@@ -92,7 +93,8 @@ const TrophyModal = ({ show, handleClose, baekjoonId, image }) => {
 TrophyModal.propTypes = {
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  githubId: PropTypes.string.isRequired,
+  baekjoonId: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default TrophyModal;
