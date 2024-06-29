@@ -84,3 +84,12 @@ display: none;
   display: block;
   clip-path: inset(2px 2px 0px 2px); /* 상, 우, 하, 좌 순서로 자르기 */
 }
+
+.sidebar ul li a.active {
+  color: #1e70c2; /* 원하는 색상으로 변경 */
+  font-weight: bold; /* 강조 효과 */
+}
+.disabled {
+  pointer-events: none; /* 클릭 불가로 설정 */
+  opacity: 0.5; /* 비활성화 효과 */
+}

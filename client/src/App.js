@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
 import PersonalAlgorithmPage from './pages/PersonalAlgorithmPage';
 import AlgorithmPage from './pages/AlgorithmPage';
 
-<h1>HeaderPage</h1>
 function App() {
   return (
     <Router>
@@ -18,43 +17,42 @@ function App() {
           </div>
 
           <ul>
-            < li>
-              <a href="/users">맴버프로필</a>
+            <li>
+              <NavLink to="/users" className={({ isActive }) => isActive ? "active" : ""}>맴버프로필</NavLink>
             </li>
           </ul>
           <div className="hr-container">
             <small className="text-start text-muted">활동</small>
-            <hr className='my-1'/>
+            <hr className='my-1' />
           </div>
           <ul>
             <li>
-              <a href="/personal-algorithm">개인알고리즘</a>
+              <NavLink to="/personal-algorithm" className={({ isActive }) => isActive ? "active" : ""}>개인알고리즘</NavLink>
             </li>
             <li>
-              <a href="/algorithm">주간알고리즘</a>
-            </li> 
-            <li>
-              <a href="#" disabled style={{ color: '#cfcfcf' }}>월간포스팅 </a>
+              <NavLink to="/algorithm" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
             </li>
             <li>
-              <a href="#" disabled style={{ color: '#cfcfcf' }}>프로필매치업</a>
+              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>월간포스팅 </NavLink>
+            </li>
+            <li>
+              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>프로필매치업</NavLink>
             </li>
           </ul>
 
-          <div class="hr-container">
+          <div className="hr-container">
             <small className="text-start text-muted">토이프로젝트</small>
             <hr className='my-1' />
           </div>
           <ul>
             <li>
-              <a href="#" disabled style={{ color: '#cfcfcf' }}>fubarvis-web-express-react
-              </a>
+              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>fubarvis-web-express-react
+              </NavLink>
             </li>
             <li>
-              <a href="#" disabled style={{ color: '#cfcfcf' }}>fubarvis-slack-bot
-              </a>
+              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>fubarvis-slack-bot
+              </NavLink>
             </li>
-
           </ul>
         </nav>
 
