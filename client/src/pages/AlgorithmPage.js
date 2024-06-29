@@ -3,16 +3,16 @@ import AlgorithmService from '../services/algorithmService';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css'; // PerfectScrollbar CSS 파일 로드
 import throphyIcon from "../assets/img/icon/trophy.png";
-
+import problems from "../data/problems.json";
 function AlgorithmPage() {
-  const [problems, setAlgorithm] = useState([]);
+  // const [problems, setAlgorithm] = useState([]);
 
-  useEffect(() => {
-    AlgorithmService.getProb().then((data) => {
-      console.log(data);
-      setAlgorithm(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   AlgorithmService.getProb().then((data) => {
+  //     console.log(data);
+  //     setAlgorithm(data);
+  //   });
+  // }, []);
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>
