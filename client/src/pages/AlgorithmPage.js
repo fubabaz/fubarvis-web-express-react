@@ -3,21 +3,27 @@ import AlgorithmService from '../services/algorithmService';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css'; // PerfectScrollbar CSS 파일 로드
 import throphyIcon from "../assets/img/icon/trophy.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import problems from "../data/problems.json";
 function AlgorithmPage() {
-  // const [problems, setAlgorithm] = useState([]);
-
-  // useEffect(() => {
-  //   AlgorithmService.getProb().then((data) => {
-  //     console.log(data);
-  //     setAlgorithm(data);
-  //   });
-  // }, []);
-
+ 
+  const handleCardClick = async () => {
+    try {
+      const data = await AlgorithmService.getProb();
+      toast.success('오옷..! 최신 데이터로 가져왔어요! 😀');
+      // 데이터 처리 로직 추가
+    } catch (error) {
+      toast.error('이런.. 데이터를 불러오는 중 오류가...');
+      console.error('Error fetching data:', error);
+    }
+  };
   return (
     <div style={{ height: '100vh', width: '100%' }}>
-      <div className="m-4">
+      <div className="m-4 d-flex justify-content-between align-items-center">
         <h3>주간 알고리즘</h3>
+        <button className="btn btn-sm btn-primary" onClick={handleCardClick}>데이터 갱신</button>
       </div>
       <div className="row content" style={{ height: '100%', width: '100%' }}>
         <PerfectScrollbar>
@@ -136,6 +142,17 @@ function AlgorithmPage() {
             </table>
           </div>
         </PerfectScrollbar>
+        <ToastContainer style={{fontSize:'14px'}}
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       </div>
     </div>
   );

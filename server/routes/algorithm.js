@@ -1,64 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const fs = require('fs');
+const path = require('path');
 
+const problemsSqlPath = path.join(__dirname, '../sql/get-problems.sql');
+
+const loadQuery = (filePath) => {
+  return fs.readFileSync(filePath, 'utf8');
+};
+
+const problemsSql = loadQuery(problemsSqlPath);
 
 router.get('/', async (req, res) => {
   try {
-    const { rows } = await db
-    .query(`WITH RANKEDDATA AS (
-    SELECT
-        PROB.PROB_NO,
-        PROB.PROB_TITLE,
-        PROB.ST_DT,
-        PROB.SUBMITTER,
-        SUBMIT.BAEKJOON_ID,
-        PROB.PROB_TIER,
-        ROW_NUMBER() OVER (PARTITION BY SUBMIT.PROB_NO ORDER BY MEMORY) AS MEMORYRANK,
-        ROW_NUMBER() OVER (PARTITION BY SUBMIT.PROB_NO ORDER BY TIME) AS TIMERANK,
-        ROW_NUMBER() OVER (PARTITION BY SUBMIT.PROB_NO ORDER BY CODE_LEN) AS CODELENRANK
-    FROM
-        PROBLEM_INFORMATION PROB
-        LEFT JOIN SUBMISSION_INFORMATION SUBMIT 
-        ON SUBMIT.PROB_NO = PROB.PROB_NO
-)
-, MINIDS AS (
-    SELECT
-        PROB_NO,
-        PROB_TITLE,
-        ST_DT,
-        SUBMITTER,
-        PROB_TIER,
-        MIN(CASE WHEN MEMORYRANK = 1 THEN BAEKJOON_ID END) AS MIN_MEMORY_ID,
-        MIN(CASE WHEN TIMERANK = 1 THEN BAEKJOON_ID END) AS MIN_TIME_ID,
-        MIN(CASE WHEN CODELENRANK = 1 THEN BAEKJOON_ID END) AS MIN_CODE_LEN_ID
-    FROM
-        RANKEDDATA
-    GROUP BY PROB_NO, PROB_TITLE, ST_DT, SUBMITTER, PROB_TIER
-)
-SELECT
-    M.PROB_NO,
-    M.PROB_TITLE,
-    M.ST_DT,
-    M.SUBMITTER,
-    M.PROB_TIER,
-    SUBMITTER_MEM.IMAGE AS SUBMITTER_IMAGE,
-    M.MIN_MEMORY_ID,
-    MEM1.IMAGE AS MIN_MEMORY_IMAGE,
-    M.MIN_TIME_ID,
-    MEM2.IMAGE AS MIN_TIME_IMAGE,
-    M.MIN_CODE_LEN_ID,
-    MEM3.IMAGE AS MIN_CODE_LEN_IMAGE
-FROM
-    MINIDS M
-LEFT JOIN MEMBER SUBMITTER_MEM ON M.SUBMITTER = SUBMITTER_MEM.GITHUB_ID
-LEFT JOIN MEMBER MEM1 ON M.MIN_MEMORY_ID = MEM1.BAEKJOON_ID
-LEFT JOIN MEMBER MEM2 ON M.MIN_TIME_ID = MEM2.BAEKJOON_ID
-LEFT JOIN MEMBER MEM3 ON M.MIN_CODE_LEN_ID = MEM3.BAEKJOON_ID
-ORDER BY
-    M.ST_DT DESC
-`);
-    res.json(rows);
+    const { rows } = await db.query(problemsSql);
+    fs.writeFile('../client/src/data/problems.json', JSON.stringify(rows), 'utf8', (err) => {
+      if (err) {
+        console.error('problems.json 파일 저장 중 오류 발생:', err);
+        res.status(500).send('파일 저장 중 오류 발생');
+        return;
+      }
+      console.log('problems.json  파일에 JSON 데이터 저장 완료');
+      res.status(200).json({
+        success: true,
+      });
+    });
+
   } catch (err) {
     console.error('Error executing query', err);
     res.status(500).json({ error: 'Internal Server Error' });
