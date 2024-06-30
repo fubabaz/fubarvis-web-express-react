@@ -15,7 +15,6 @@ const TrophyModal = ({ show, handleClose, baekjoonId, image }) => {
         // 필터링된 데이터를 상태에 저장
         const filtered = trophyData.filter(data => data.baekjoon_id === baekjoonId);
         setFilteredTrophyData(filtered);
-        console.log(filtered);
       } catch (error) {
         console.error("Error fetching trophy data:", error);
       } finally {
