@@ -16,7 +16,6 @@ function HomePage() {
     document.body.appendChild(script);
 
     AlgorithmService.individual().then((data) => {
-      console.log(data);
       setIndividual(data);
     });
 
