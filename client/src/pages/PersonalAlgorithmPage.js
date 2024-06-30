@@ -3,9 +3,8 @@ import AlgorithmService from "../services/algorithmService";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css"; // PerfectScrollbar CSS 파일 로드
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
-import solvedLogo from "../assets/img/logo/solved-logo.png";
 
-function HomePage() {
+function PersonalAlgorithmPage() {
   const [individual, setIndividual] = useState([]);
   const [selectedProblems, setSelectedProblems] = useState([]); // State for selected problems
 
@@ -114,4 +113,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default PersonalAlgorithmPage;
