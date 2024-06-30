@@ -5,18 +5,17 @@ import UserService from '../services/userService';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import users from '../data/users.json';
 
 function UserPage() {
   const handleCardClick = async () => {
-    // 비동기 작업을 병렬로 실행하고 각각의 성공/실패 처리
     await  Promise.all([
       UserService.getUsers(),
       UserService.fetchTrophyData()
     ])
     .then(([usersData, trophyData]) => {
       toast.success('오옷..! 최신 데이터로 가져왔어요! 😀');
-      // 필요시 가져온 데이터 처리
     })
     .catch((error) => {
       toast.error('이런.. 데이터를 불러오는 중 오류가...');
