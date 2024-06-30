@@ -8,13 +8,17 @@ function UserPage() {
   const handleCardClick = () => {
     UserService.getUsers().then((data) => {
     });
+
+    UserService.fetchTrophyData().then((data) => {
+    });
   };
 
   return (
     <div>
-      <div className="m-4">
-      <h3>맴버 프로필</h3>
-      <button onClick={() => handleCardClick()}>click</button>
+      
+      <div className="m-4 d-flex justify-content-between align-items-center">
+        <h3>맴버 프로필</h3>
+        <button className="btn btn-primary" onClick={handleCardClick}>불러오기</button>
       </div>
       <PerfectScrollbar options={{ suppressScrollX: true }}>
       <div className="user-list row content">

@@ -2,48 +2,59 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const fs = require('fs');
 
 // GET /api/users
 router.get('/', async (req, res) => {
   try {
-    const { rows } = await db
-    .query(`SELECT 
-      M.BAEKJOON_ID,
-      M.GITHUB_ID,
-      M.MEMBER_NM,
-      M.IMAGE,
-      R.LEV,
-      R.RANKING,
-      R.AC_RATING,
-      T.TROPHY_CNT,
-      (SELECT COUNT(*) 
-      FROM POST_INFORMATION PI 
-      WHERE PI.GITHUB_ID = M.GITHUB_ID) AS POSTING_CNT
-FROM (
-    SELECT *,
-           ROW_NUMBER() OVER(PARTITION BY BAEKJOON_ID ORDER BY BAEKJOON_ID, BASE_DT DESC) AS RN
-    FROM RANKING_INFORMATION
-    WHERE ACCOUNT_TYPE = 'I'
-) R
-INNER JOIN MEMBER M ON R.BAEKJOON_ID = M.BAEKJOON_ID 
-                    AND M.DEL_YN = 'N'
-                    AND R.RN = 1
-LEFT JOIN (
-    SELECT BAEKJOON_ID, COUNT(*) AS TROPHY_CNT
-    FROM (
-        SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY MEMORY) AS RN
-        FROM SUBMISSION_INFORMATION
-        UNION ALL
-        SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY TIME) AS RN
-        FROM SUBMISSION_INFORMATION
-        UNION ALL
-        SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY CODE_LEN) AS RN
-        FROM SUBMISSION_INFORMATION
-    ) S
-    WHERE S.RN = 1
-    GROUP BY BAEKJOON_ID
-) T ON R.BAEKJOON_ID = T.BAEKJOON_ID`);
-    res.json(rows);
+    const { rows } = await db.query(`
+      SELECT 
+        M.BAEKJOON_ID,
+        M.GITHUB_ID,
+        M.MEMBER_NM,
+        M.IMAGE,
+        R.LEV,
+        R.RANKING,
+        R.AC_RATING,
+        T.TROPHY_CNT,
+        (SELECT COUNT(*) 
+         FROM POST_INFORMATION PI 
+         WHERE PI.GITHUB_ID = M.GITHUB_ID) AS POSTING_CNT
+      FROM (
+        SELECT *,
+               ROW_NUMBER() OVER(PARTITION BY BAEKJOON_ID ORDER BY BAEKJOON_ID, BASE_DT DESC) AS RN
+        FROM RANKING_INFORMATION
+        WHERE ACCOUNT_TYPE = 'I'
+      ) R
+      INNER JOIN MEMBER M ON R.BAEKJOON_ID = M.BAEKJOON_ID 
+                          AND M.DEL_YN = 'N'
+                          AND R.RN = 1
+      LEFT JOIN (
+        SELECT BAEKJOON_ID, COUNT(*) AS TROPHY_CNT
+        FROM (
+          SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY MEMORY) AS RN
+          FROM SUBMISSION_INFORMATION
+          UNION ALL
+          SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY TIME) AS RN
+          FROM SUBMISSION_INFORMATION
+          UNION ALL
+          SELECT PROB_NO, BAEKJOON_ID, ROW_NUMBER() OVER(PARTITION BY PROB_NO ORDER BY CODE_LEN) AS RN
+          FROM SUBMISSION_INFORMATION
+        ) S
+        WHERE S.RN = 1
+        GROUP BY BAEKJOON_ID
+      ) T ON R.BAEKJOON_ID = T.BAEKJOON_ID`);
+
+    fs.writeFile('../client/src/data/users.json', JSON.stringify(rows), 'utf8', (err) => {
+      if (err) {
+        console.error('users.json 파일 저장 중 오류 발생:', err);
+        res.status(500).send('파일 저장 중 오류 발생');
+        return;
+      }
+      console.log('users.json  파일에 JSON 데이터 저장 완료');
+      res.status(200).send('JSON 파일 생성 완료');
+    });
+
   } catch (err) {
     console.error('Error executing query', err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -80,12 +91,22 @@ router.get('/:githubId/trophies', async (req, res) => {
     ) TROPHY INNER JOIN PROBLEM_INFORMATION  PROB
     ON TROPHY.PROB_NO = PROB.PROB_NO
     AND TROPHY.RN = 1
-    AND TROPHY.BAEKJOON_ID = $1
+   /* AND TROPHY.BAEKJOON_ID = $1 */
     GROUP BY PROB.PROB_NO, TROPHY_TYPE, BAEKJOON_ID 
     `;
     
-    const { rows } = await db.query(query, [githubId]);
-    res.json(rows);
+   // const { rows } = await db.query(query, [githubId]);
+    const { rows } = await db.query(query)
+    fs.writeFile('../client/src/data/throphy.json', JSON.stringify(rows), 'utf8', (err) => {
+      if (err) {
+        console.error('파일 저장 중 오류 발생:', err);
+        res.status(500).send('파일 저장 중 오류 발생');
+        return;
+      }
+      console.log('throphy.json 파일에 JSON 데이터 저장 완료');
+      res.status(200).send('JSON 파일 생성 완료');
+    });
+
   } catch (err) {
     console.error('Error executing query', err);
     res.status(500).json({ error: 'Internal Server Error' });

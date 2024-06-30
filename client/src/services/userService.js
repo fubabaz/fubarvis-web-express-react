@@ -28,4 +28,5 @@ export const fetchTrophyData = async (githubId) => {
 
 export default {
   getUsers,
+  fetchTrophyData,
 };
