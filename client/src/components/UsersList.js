@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getUsers } from '../services/userService';
 import users from '../data/users.json';
 
 function UsersList() {
-  // const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   getUsers()
-  //     .then(data => {
-  //       setUsers(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching users:', error);
-  //     });
-  // }, []);
-
   return (
     <div>
       <ul>
