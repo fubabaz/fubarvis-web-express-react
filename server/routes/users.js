@@ -52,7 +52,9 @@ router.get('/', async (req, res) => {
         return;
       }
       console.log('users.json  파일에 JSON 데이터 저장 완료');
-      res.status(200).send('JSON 파일 생성 완료');
+      res.status(200).json({
+        success: true,
+      });
     });
 
   } catch (err) {
@@ -103,10 +105,11 @@ router.get('/:githubId/trophies', async (req, res) => {
         res.status(500).send('파일 저장 중 오류 발생');
         return;
       }
-      console.log('throphy.json 파일에 JSON 데이터 저장 완료');
-      res.status(200).send('JSON 파일 생성 완료');
+      console.log('result.json 파일에 JSON 데이터 저장 완료');
+      res.status(200).json({
+        success: true,
+      });
     });
-
   } catch (err) {
     console.error('Error executing query', err);
     res.status(500).json({ error: 'Internal Server Error' });
