@@ -7,8 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import problems from "../data/problems.json";
+
 function AlgorithmPage() {
- 
+
   const handleCardClick = async () => {
     try {
       const data = await AlgorithmService.getProb();
@@ -19,6 +20,28 @@ function AlgorithmPage() {
       console.error('Error fetching data:', error);
     }
   };
+
+  const renderStatusBadge = (status) => {
+    let badgeClass = '';
+    let badgeText = '';
+
+    switch (status) {
+      case 'OPEN':
+        badgeClass = 'badge bg-success';
+        badgeText = 'OPEN';
+        break;
+      case 'CLOSED':
+        badgeClass = 'badge bg-danger';
+        badgeText = 'CLOSED';
+        break;
+      default:
+        badgeClass = 'badge bg-secondary';
+        badgeText = '알 수 없음';
+    }
+
+    return <span className={badgeClass}>{badgeText}</span>;
+  };
+
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <div className="m-4 d-flex justify-content-between align-items-center">
@@ -32,6 +55,7 @@ function AlgorithmPage() {
               <thead style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 1 }}>
                 <tr>
                   <th className="col-1">#</th>
+                  <th className="col-1">상태</th>
                   <th className="col-2">제출자</th>
                   <th className="col-1">번호</th>
                   <th className="col-2">문제</th>
@@ -44,6 +68,7 @@ function AlgorithmPage() {
                 {problems.map((problem, index) => (
                   <tr className='align-middle' key={index}>
                     <td>{index}</td>
+                    <td>{renderStatusBadge(problem.status)}</td>
                     <td>
                       {problem.submitter_image && (
                         <img
@@ -56,8 +81,10 @@ function AlgorithmPage() {
                       )}
                     </td>
                     <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
-                    <td><img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`}></img>
-                      {problem.prob_title}</td>
+                    <td>
+                      <img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`} alt="Problem Tier"/>
+                      {problem.prob_title}
+                    </td>
                     <td>
                       {problem.min_memory_image && (
                         <div style={{ position: "relative", display: "inline-block" }}>
@@ -143,16 +170,16 @@ function AlgorithmPage() {
           </div>
         </PerfectScrollbar>
         <ToastContainer style={{fontSize:'14px'}}
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );
