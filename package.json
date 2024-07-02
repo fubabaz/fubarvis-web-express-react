@@ -6,7 +6,8 @@
     "server": "cd server && node index.js",
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "postinstall": "cd server && npm install && cd ../client && npm install"
   },
   "dependencies": {
     "express": "^4.17.1"
