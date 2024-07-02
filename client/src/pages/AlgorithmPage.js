@@ -58,6 +58,7 @@ function AlgorithmPage() {
                   <th className="col-1">상태</th>
                   <th className="col-2">제출자</th>
                   <th className="col-1">번호</th>
+                  <th className="col-1">티어</th>
                   <th className="col-2">문제</th>
                   <th className="col-2">메모리</th>
                   <th className="col-2">수행시간</th>
@@ -75,14 +76,15 @@ function AlgorithmPage() {
                           height="28"
                           width="28"
                           src={problem.submitter_image}
-                          className="mx-2 mb-1 rounded user-avatar"
+                          className="mx-2 mb-1 rounded-circle"
                           alt="User Avatar"
                         />
                       )}
                     </td>
                     <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
+                    <td><img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`} alt="Problem Tier"/>
+                    </td>
                     <td>
-                      <img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`} alt="Problem Tier"/>
                       {problem.prob_title}
                     </td>
                     <td>
@@ -92,7 +94,7 @@ function AlgorithmPage() {
                             height="28"
                             width="28"
                             src={problem.min_memory_image}
-                            className="rounded user-avatar"
+                            className="rounded-circle"
                             alt="User Avatar"
                           />
                           <img
@@ -118,7 +120,7 @@ function AlgorithmPage() {
                             height="28"
                             width="28"
                             src={problem.min_time_image}
-                            className="rounded user-avatar"
+                            className="rounded-circle user-avatar"
                             alt="User Avatar"
                           />
                           <img
@@ -144,7 +146,7 @@ function AlgorithmPage() {
                             height="28"
                             width="28"
                             src={problem.min_code_len_image}
-                            className="rounded user-avatar"
+                            className="rounded-circle user-avatar"
                             alt="User Avatar"
                           />
                           <img

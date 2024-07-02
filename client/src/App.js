@@ -4,6 +4,7 @@ import './App.css';
 import UserPage from './pages/UserPage';
 import PersonalAlgorithmPage from './pages/PersonalAlgorithmPage';
 import AlgorithmPage from './pages/AlgorithmPage';
+import GuidePayback from './pages/GuidePayback';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <li>
               <NavLink to="/users" className={({ isActive }) => isActive ? "active" : ""}>맴버프로필</NavLink>
             </li>
+            <li>
+              <NavLink to="/guide-payback" className={({ isActive }) => isActive ? "active" : ""}>페이백안내</NavLink>
+            </li>
           </ul>
           <div className="hr-container">
             <small className="text-start text-muted">활동</small>
@@ -26,10 +30,10 @@ function App() {
           </div>
           <ul>
             <li>
-              <NavLink to="/personal-algorithm" className={({ isActive }) => isActive ? "active" : ""}>개인알고리즘</NavLink>
+              <NavLink to="/algorithm-individual" className={({ isActive }) => isActive ? "active" : ""}>개인알고리즘</NavLink>
             </li>
             <li>
-              <NavLink to="/algorithm" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
+              <NavLink to="/algorithm-group" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
             </li>
             <li>
               <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>월간포스팅 </NavLink>
@@ -60,8 +64,9 @@ function App() {
           <Routes>
             <Route path="/" element={<UserPage />} />
             <Route path="/users" element={<UserPage />} />
-            <Route path="/personal-algorithm" element={<PersonalAlgorithmPage />} />
-            <Route path="/algorithm" element={<AlgorithmPage />} />
+            <Route path="/algorithm-individual" element={<PersonalAlgorithmPage />} />
+            <Route path="/algorithm-group" element={<AlgorithmPage />} />
+            <Route path="/guide-payback" element={<GuidePayback />} />
           </Routes>
         </main>
       </div>
