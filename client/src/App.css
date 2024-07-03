@@ -93,3 +93,6 @@ display: none;
   pointer-events: none; /* 클릭 불가로 설정 */
   opacity: 0.5; /* 비활성화 효과 */
 }
+li.nav-item{
+  margin-left:10px;
+}

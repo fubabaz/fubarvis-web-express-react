@@ -3,13 +3,14 @@ import AlgorithmService from "../services/algorithmService";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
-
 import problemss from "../data/problems-group.json";
 
 function PersonalAlgorithmPage() {
   const [individual, setIndividual] = useState([]);
   const [selectedProblems, setSelectedProblems] = useState([]);
   const [filterData, setFilterData] = useState(problemss);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -26,10 +27,14 @@ function PersonalAlgorithmPage() {
     };
   }, []);
 
-  const handleCardClick = (problems) => {
-    if (problems) {
-      const individualData = problems.split(" ");
-      const filtered = problemss.filter(problem => individualData.includes(problem.prob_no));
+  const handleCardClick = (data, index) => {
+    setSelectedIndex(index);
+    setSelectedUser(data);
+    if (data.problems) {
+      const individualData = data.problems.split(" ");
+      const filtered = problemss.filter((problem) =>
+        individualData.includes(problem.prob_no)
+      );
       setFilterData(filtered);
       setSelectedProblems(individualData);
     } else {
@@ -47,14 +52,23 @@ function PersonalAlgorithmPage() {
         <div className="col-3" style={{ height: "calc(100vh - 150px)" }}>
           <PerfectScrollbar>
             {individual.map((data, index) => (
-              <div key={index}
-                onClick={() => handleCardClick(data.problems)} // Click handler 
-                className="card mb-3 me-3 bg-white rounded border-0 card">
+              <div
+                key={index}
+                onClick={() => handleCardClick(data, index)} // Pass index to click handler
+                className="card mb-3 me-3 rounded border-0 card"
+                style={{
+                  backgroundColor:
+                    selectedIndex === index ? "#f8f8f8" : "#ffffff",
+                }}
+              >
                 <div
                   className="card-body shadow-sm"
                   style={{
-                    border: "1px solid #f7f7f7",
-                    borderRadius: "2px",
+                    border:
+                      selectedIndex === index
+                        ? "1px solid #e3e3e3"
+                        : "1px solid #f7f7f7",
+                    borderRadius: "5px",
                     fontSize: "13.5px",
                   }}
                 >
@@ -65,8 +79,7 @@ function PersonalAlgorithmPage() {
                       height="28"
                       width="28"
                       src={data.image}
-                      className="rounded user-avatar"
-                      alt="User Avatar"
+                      className="rounded"
                     />
                     <img
                       height="15"
@@ -98,46 +111,71 @@ function PersonalAlgorithmPage() {
             ))}
           </PerfectScrollbar>
         </div>
-        <div className="col-9" style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}>
-        {(filterData||problemss).length}
-          <PerfectScrollbar>
+        <div
+          className="col-9"
+          style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}
+        >
+          <div
+            className="card-body shadow-sm p-4"
+            style={{
+              border: "1px solid #f7f7f7",
+              borderRadius: "2px",
+              fontSize: "13.5px",
+            }}
+          >
+            {selectedUser && (
+              <>
+                <img
+                  height="35"
+                  width="35"
+                  src={selectedUser.image}
+                  className="rounded user-avatar"
+                />
+                <p class="font-weight-bold d-flex">{selectedUser.github_id}</p>
+                <p class="h4 font-weight-bold d-flex">
+                  {(filterData || problemss).length}건
+                </p>
+              </>
+            )}
 
-            {/* <div
-              className="flourish-embed flourish-chart"
-              data-src="visualisation/11965768"
-            /> */}
-
-            <table className="table">
-              <thead style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 1 }}>
-                <tr>
-                  <th className="col-1">#</th>
-                  <th className="col-1">번호</th>
-                  <th className="col-2">제출</th>
-                </tr>
-              </thead>
-              <tbody style={{ fontSize: "13px" }}>
-                {(filterData||problemss).map((problem, index) => (
-                  <tr className='align-middle' key={index}>
-                    <td>{(filterData||problemss).length - index}</td>
-                    <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
-                    <td className="d-flex">
-                      {(problem.ids.split(' ').map((id, idx) => (
-                        <div key={idx}>
-                          <img
-                            height="20"
-                            width="20"
-                            src={id}
-                            className="me-1 rounded-circle user-avatar"
-                            alt="User Avatar"
-                          />
-                        </div>
-                      )))}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </PerfectScrollbar>
+            <PerfectScrollbar>
+              <table className="table">
+                <tbody style={{ fontSize: "13px" }}>
+                  {(filterData || problemss).map((problem, index) => (
+                    <tr className="align-middle" key={index}>
+                      <td>
+                        <a
+                          style={{
+                            textDecoration: "none",
+                            fontWeight: "bold",
+                            color: "rgb(0, 159, 107)",
+                          }}
+                          href={`https://www.acmicpc.net/problem/${problem.prob_no}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {problem.prob_no}
+                        </a>
+                      </td>
+                      <td className="d-flex">
+                        {problem.ids.split(" ").map((id, idx) => (
+                          <div key={idx}>
+                            <img
+                              height="20"
+                              width="20"
+                              src={id}
+                              className="me-2 rounded-circle user-avatar"
+                              alt="User Avatar"
+                            />
+                          </div>
+                        ))}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </PerfectScrollbar>
+          </div>
         </div>
       </div>
     </div>
