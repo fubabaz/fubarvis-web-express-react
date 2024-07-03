@@ -4,9 +4,13 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
 import problemss from "../data/problems-group.json";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import individual from "../data/problems-individual-info.json";
 
 function PersonalAlgorithmPage() {
-  const [individual, setIndividual] = useState([]);
+  //const [individual, setIndividual] = useState([]);
   const [selectedProblems, setSelectedProblems] = useState([]);
   const [filterData, setFilterData] = useState(problemss);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -18,14 +22,22 @@ function PersonalAlgorithmPage() {
     script.async = true;
     document.body.appendChild(script);
 
-    AlgorithmService.individual().then((data) => {
-      setIndividual(data);
-    });
+    
 
     return () => {
       document.body.removeChild(script);
     };
   }, []);
+
+  const updateData = async () => {
+    try {
+      await AlgorithmService.individual();
+      toast.success('오옷..! 최신 데이터로 가져왔어요! 😀');
+    } catch (error) {
+      toast.error('이런.. 데이터를 불러오는 중 오류가...');
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const handleCardClick = (data, index) => {
     setSelectedIndex(index);
@@ -45,8 +57,9 @@ function PersonalAlgorithmPage() {
 
   return (
     <div>
-      <div className="m-4">
+      <div className="m-4 d-flex justify-content-between align-items-center">
         <h3>개인알고리즘</h3>
+        <button className="btn btn-sm btn-primary" onClick={updateData}>데이터 갱신</button>
       </div>
       <div className="row content">
         <div className="col-3" style={{ height: "calc(100vh - 150px)" }}>
@@ -113,7 +126,7 @@ function PersonalAlgorithmPage() {
         </div>
         <div
           className="col-9"
-          style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}
+          style={{ height: "calc(100vh - 90px)", overflow: "hidden" }}
         >
           <div
             className="flourish-embed flourish-chart"
@@ -184,6 +197,17 @@ function PersonalAlgorithmPage() {
             </PerfectScrollbar>
           </div>
         </div>
+        <ToastContainer style={{fontSize:'14px'}}
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );
