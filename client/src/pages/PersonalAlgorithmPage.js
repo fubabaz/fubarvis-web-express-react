@@ -39,7 +39,7 @@ function PersonalAlgorithmPage() {
       setSelectedProblems(individualData);
     } else {
       setSelectedProblems([]);
-      setFilterData([]); // 선택된 문제가 없을 경우 filterData를 빈 배열로 설정
+      setFilterData([]);
     }
   };
 
@@ -116,11 +116,18 @@ function PersonalAlgorithmPage() {
           style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}
         >
           <div
+            className="flourish-embed flourish-chart"
+            data-src="visualisation/11965768"
+            data-height="250px"
+          />
+          <div
             className="card-body shadow-sm p-4"
             style={{
               border: "1px solid #f7f7f7",
               borderRadius: "2px",
               fontSize: "13.5px",
+              height: "calc(100% - 60px)",
+              overflow: "hidden"
             }}
           >
             {selectedUser && (
@@ -138,7 +145,7 @@ function PersonalAlgorithmPage() {
               </>
             )}
 
-            <PerfectScrollbar>
+            <PerfectScrollbar style={{ height: "calc(100% - 60px)" }}>
               <table className="table">
                 <tbody style={{ fontSize: "13px" }}>
                   {(filterData || problemss).map((problem, index) => (
