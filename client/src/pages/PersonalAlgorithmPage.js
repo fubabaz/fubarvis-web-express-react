@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import AlgorithmService from "../services/algorithmService";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css"; // PerfectScrollbar CSS 파일 로드
+import "react-perfect-scrollbar/dist/css/styles.css";
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
+
+import problemss from "../data/problems-group.json";
 
 function PersonalAlgorithmPage() {
   const [individual, setIndividual] = useState([]);
-  const [selectedProblems, setSelectedProblems] = useState([]); // State for selected problems
+  const [selectedProblems, setSelectedProblems] = useState([]);
+  const [filterData, setFilterData] = useState(problemss);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -19,25 +22,27 @@ function PersonalAlgorithmPage() {
     });
 
     return () => {
-      document.body.removeChild(script); // 컴포넌트 언마운트 시 스크립트 제거
+      document.body.removeChild(script);
     };
   }, []);
 
   const handleCardClick = (problems) => {
     if (problems) {
-      setSelectedProblems(problems.split(" ")); // Split problems by space and set the state
+      const individualData = problems.split(" ");
+      const filtered = problemss.filter(problem => individualData.includes(problem.prob_no));
+      setFilterData(filtered);
+      setSelectedProblems(individualData);
     } else {
       setSelectedProblems([]);
+      setFilterData([]); // 선택된 문제가 없을 경우 filterData를 빈 배열로 설정
     }
   };
-
 
   return (
     <div>
       <div className="m-4">
         <h3>개인알고리즘</h3>
       </div>
-
       <div className="row content">
         <div className="col-3" style={{ height: "calc(100vh - 150px)" }}>
           <PerfectScrollbar>
@@ -94,18 +99,44 @@ function PersonalAlgorithmPage() {
           </PerfectScrollbar>
         </div>
         <div className="col-9" style={{ height: "calc(100vh - 150px)", overflow: "hidden" }}>
+        {(filterData||problemss).length}
           <PerfectScrollbar>
-            <div id="problems" className="mx-2" style={{ fontSize: '12px', display: 'flex', flexWrap: 'wrap' }}>
-              {selectedProblems.map((problem, index) => (
-                <small key={index} className="problem me-1">
-                  <a href={`https://www.acmicpc.net/problem/${problem}`} target="_blank">{problem}</a>
-                </small>
-              ))}
-            </div>
-            <div
+
+            {/* <div
               className="flourish-embed flourish-chart"
               data-src="visualisation/11965768"
-            />
+            /> */}
+
+            <table className="table">
+              <thead style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 1 }}>
+                <tr>
+                  <th className="col-1">#</th>
+                  <th className="col-1">번호</th>
+                  <th className="col-2">제출</th>
+                </tr>
+              </thead>
+              <tbody style={{ fontSize: "13px" }}>
+                {(filterData||problemss).map((problem, index) => (
+                  <tr className='align-middle' key={index}>
+                    <td>{(filterData||problemss).length - index}</td>
+                    <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
+                    <td className="d-flex">
+                      {(problem.ids.split(' ').map((id, idx) => (
+                        <div key={idx}>
+                          <img
+                            height="20"
+                            width="20"
+                            src={id}
+                            className="me-1 rounded-circle user-avatar"
+                            alt="User Avatar"
+                          />
+                        </div>
+                      )))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </PerfectScrollbar>
         </div>
       </div>
