@@ -10,7 +10,7 @@ function GuidePayback() {
         <h3>페이백 가이드</h3>
       </div>
       <PerfectScrollbar options={{ suppressScrollX: true }}>
-        <div className="user-list row content ms-4">
+        <div className="user-list row content ms-4" style={{ height: "calc(100vh - 150px)" }}>
           <p className="h5">🙋‍♂️ 월 4,000 원 정도는 괜찮잖아?</p>
           <small className='text-muted'>
             활동 동기부여를 위해 우리는 월 <mark>4,000원</mark>씩 돈을 모아보기로 하였어요 🤑<br />
