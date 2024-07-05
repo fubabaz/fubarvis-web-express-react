@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import problems from "../data/problems.json";
 
-function AlgorithmPage() {
+function WeeklyAlgorithmPage() {
 
   const handleCardClick = async () => {
     try {
@@ -27,7 +27,7 @@ function AlgorithmPage() {
 
     switch (status) {
       case 'OPEN':
-        badgeClass = 'badge bg-success';
+        badgeClass = 'badge bg-primary';
         badgeText = 'OPEN';
         break;
       case 'CLOSED':
@@ -54,22 +54,30 @@ function AlgorithmPage() {
             <table className="table">
               <thead style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 1 }}>
                 <tr>
-                  <th className="col-1">#</th>
-                  <th className="col-1">상태</th>
-                  <th className="col-2">제출자</th>
-                  <th className="col-1">번호</th>
-                  <th className="col-1">티어</th>
-                  <th className="col-2">문제</th>
-                  <th className="col-2">메모리</th>
-                  <th className="col-2">수행시간</th>
-                  <th className="col-2">코드길이</th>
+                  <th className="col-1" style={{ width: '60px' }}>티어</th>
+                  <th className="col-5" style={{ width: 'auto' }}>상태</th>
+                  <th className="col-2" style={{ width: '200px' }}>제출자</th>
+                  <th className="col-2" style={{ width: '100px' }}>메모리</th>
+                  <th className="col-2" style={{ width: '100px' }}>수행시간</th>
+                  <th className="col-2" style={{ width: '100px' }}>코드길이</th>
                 </tr>
               </thead>
               <tbody style={{ fontSize: "13px" }}>
                 {problems.map((problem, index) => (
                   <tr className='align-middle' key={index}>
-                    <td>{index}</td>
-                    <td>{renderStatusBadge(problem.status)}</td>
+                    <td><img height="35"
+                      style={{
+                        borderRadius: '3px'
+                      }}
+                      src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.svg`} alt="Problem Tier" />
+                    </td>
+                    <td>{renderStatusBadge(problem.status)}
+                      <h6 className="my-1"><a style={{
+                        textDecoration: "none",
+                        color: "rgb(0, 159, 107)",
+                      }}
+                        href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no} {problem.prob_title}</a> </h6>
+                    </td>
                     <td>
                       {problem.submitter_image && (
                         <img
@@ -80,12 +88,6 @@ function AlgorithmPage() {
                           alt="User Avatar"
                         />
                       )}
-                    </td>
-                    <td><a href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no}</a></td>
-                    <td><img height="20" src={`${process.env.PUBLIC_URL}/assets/img/icon/${problem.prob_tier}.png`} alt="Problem Tier"/>
-                    </td>
-                    <td>
-                      {problem.prob_title}
                     </td>
                     <td>
                       {problem.min_memory_image && (
@@ -171,7 +173,7 @@ function AlgorithmPage() {
             </table>
           </div>
         </PerfectScrollbar>
-        <ToastContainer style={{fontSize:'14px'}}
+        <ToastContainer style={{ fontSize: '14px' }}
           position="top-center"
           autoClose={3000}
           hideProgressBar={false}
@@ -187,4 +189,4 @@ function AlgorithmPage() {
   );
 }
 
-export default AlgorithmPage;
+export default WeeklyAlgorithmPage;

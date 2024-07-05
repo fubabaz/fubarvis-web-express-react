@@ -107,7 +107,7 @@ function FreeAlgorithmPage() {
                     />
                     <img
                       height="15"
-                      src={`${process.env.PUBLIC_URL}/assets/img/icon/${data.tier}.png`}
+                      src={`${process.env.PUBLIC_URL}/assets/img/icon/${data.tier}.svg`}
                       className="rounded"
                       alt="Trophy Icon"
                       style={{
@@ -153,48 +153,48 @@ function FreeAlgorithmPage() {
               <div className="row">
                 <div className="col-5">
                   <img
-                     style={{
-                      height:selectedIndex === null ? "62px" : "35px",
-                      width:selectedIndex === null ? "100px" : "35px",
+                    style={{
+                      height: selectedIndex === null ? "62px" : "35px",
+                      width: selectedIndex === null ? "100px" : "35px",
                       cursor: "pointer",
                     }}
                     src={selectedUser.image}
                     className="rounded user-avatar"
                   />
-                {selectedIndex !== null && (
-                  <p className="h6 font-weight-bold d-flex">{selectedUser.github_id}</p>
-                )}
+                  {selectedIndex !== null && (
+                    <p className="h6 font-weight-bold d-flex">{selectedUser.github_id}</p>
+                  )}
                   <p className="h4 font-weight-bold d-flex">
                     {(filterData || problemss).length}건 해결!
                   </p>
                 </div>
                 {selectedIndex !== null && (
-                <div className="col-7 d-flex justify-content-start align-items-center text-center">
-                  <div className="me-4" style={{ color: '#ad5600' }}>
-                    <div className="h6">Bronze</div>
-                    <div className="h4">{selectedUser.bronze_cnt}</div>
+                  <div className="col-7 d-flex justify-content-start align-items-center text-center">
+                    <div className="me-4" style={{ color: '#ad5600' }}>
+                      <div className="h6">Bronze</div>
+                      <div className="h4">{selectedUser.bronze_cnt}</div>
+                    </div>
+                    <div className="me-4" style={{ color: '#435f7a' }}>
+                      <div className="h6">Silver</div>
+                      <div className="h4">{selectedUser.silver_cnt}</div>
+                    </div>
+                    <div className="me-4" style={{ color: '#ec9a00' }}>
+                      <div className="h6">Gold</div>
+                      <div className="h4">{selectedUser.gold_cnt}</div>
+                    </div>
+                    <div className="me-4" style={{ color: '#27e2a4' }}>
+                      <div className="h6">Platinum</div>
+                      <div className="h4">{selectedUser.platinum_cnt}</div>
+                    </div>
+                    <div className="me-4" style={{ color: '#00b4fc' }}>
+                      <div className="h6">Diamond</div>
+                      <div className="h4">{selectedUser.diamond_cnt}</div>
+                    </div>
+                    <div className="me-4" style={{ color: '#ff0062' }}>
+                      <div className="h6">Ruby</div>
+                      <div className="h4">{selectedUser.ruby_cnt}</div>
+                    </div>
                   </div>
-                  <div className="me-4" style={{ color: '#435f7a' }}>
-                    <div className="h6">Silver</div>
-                    <div className="h4">{selectedUser.silver_cnt}</div>
-                  </div>
-                  <div className="me-4" style={{ color: '#ec9a00' }}>
-                    <div className="h6">Gold</div>
-                    <div className="h4">{selectedUser.gold_cnt}</div>
-                  </div>
-                  <div className="me-4" style={{ color: '#27e2a4' }}>
-                    <div className="h6">Platinum</div>
-                    <div className="h4">{selectedUser.platinum_cnt}</div>
-                  </div>
-                  <div className="me-4" style={{ color: '#00b4fc' }}>
-                    <div className="h6">Diamond</div>
-                    <div className="h4">{selectedUser.diamond_cnt}</div>
-                  </div>
-                  <div className="me-4" style={{ color: '#ff0062' }}>
-                    <div className="h6">Ruby</div>
-                    <div className="h4">{selectedUser.ruby_cnt}</div>
-                  </div>
-                </div>
                 )}
               </div>
             )}
