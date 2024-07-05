@@ -3,6 +3,12 @@ SELECT * FROM (
                    SOL_PROB_CNT,
                    RANKING,
                    PROBLEMS,
+                   BRONZE_CNT,
+                   SILVER_CNT,
+                   GOLD_CNT,
+                   PLATINUM_CNT,
+                   DIAMOND_CNT,
+                   RUBY_CNT,
                    CASE WHEN UPPER(LEV) !='UNRATED' THEN (SUBSTRING(SPLIT_PART(LEV, ' ', 1),1,1)||CASE 
                    WHEN  SPLIT_PART(LEV, ' ', 2) = 'I' THEN '1'
                    WHEN  SPLIT_PART(LEV, ' ', 2) = 'II' THEN '2'
