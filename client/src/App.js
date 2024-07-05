@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import './App.css';
 import UserPage from './pages/UserPage';
-import PersonalAlgorithmPage from './pages/PersonalAlgorithmPage';
+import FreeAlgorithmPage from './pages/FreeAlgorithmPage';
 import AlgorithmPage from './pages/AlgorithmPage';
 import GuidePayback from './pages/GuidePayback';
 
@@ -30,7 +30,7 @@ function App() {
           </div>
           <ul>
             <li>
-              <NavLink to="/algorithm-individual" className={({ isActive }) => isActive ? "active" : ""}>개인알고리즘</NavLink>
+              <NavLink to="/algorithm-free" className={({ isActive }) => isActive ? "active" : ""}>자유알고리즘</NavLink>
             </li>
             <li>
               <NavLink to="/algorithm-group" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
@@ -64,7 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<UserPage />} />
             <Route path="/users" element={<UserPage />} />
-            <Route path="/algorithm-individual" element={<PersonalAlgorithmPage />} />
+            <Route path="/algorithm-free" element={<FreeAlgorithmPage />} />
             <Route path="/algorithm-group" element={<AlgorithmPage />} />
             <Route path="/guide-payback" element={<GuidePayback />} />
           </Routes>

@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import individual from "../data/problems-individual-info.json";
 
-function PersonalAlgorithmPage() {
+function FreeAlgorithmPage() {
   const [selectedProblems, setSelectedProblems] = useState([]);
   const [filterData, setFilterData] = useState(problemss);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -69,7 +69,7 @@ function PersonalAlgorithmPage() {
   return (
     <div>
       <div className="m-4 d-flex justify-content-between align-items-center">
-        <h3>개인알고리즘</h3>
+        <h3>자유알고리즘</h3>
         <button className="btn btn-sm btn-primary" onClick={updateData}>데이터 갱신</button>
       </div>
       <div className="row content">
@@ -254,4 +254,4 @@ function PersonalAlgorithmPage() {
   );
 }
 
-export default PersonalAlgorithmPage;
+export default FreeAlgorithmPage;
