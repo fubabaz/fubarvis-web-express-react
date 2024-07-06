@@ -4,6 +4,8 @@ import './App.css';
 import UserPage from './pages/UserPage';
 import FreeAlgorithmPage from './pages/FreeAlgorithmPage';
 import WeeklyAlgorithmPage from './pages/WeeklyAlgorithmPage';
+import MonthlyPostingPage from './pages/MonthlyPostingPage';
+
 import GuidePayback from './pages/GuidePayback';
 
 function App() {
@@ -36,7 +38,7 @@ function App() {
               <NavLink to="/algorithm-weekly" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
             </li>
             <li>
-              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>월간포스팅 </NavLink>
+            <NavLink to="/posting-monthly" className={({ isActive }) => isActive ? "active" : ""}>월간포스팅</NavLink>
             </li>
             <li>
               <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>프로필매치업</NavLink>
@@ -64,9 +66,10 @@ function App() {
           <Routes>
             <Route path="/" element={<UserPage />} />
             <Route path="/users" element={<UserPage />} />
+            <Route path="/guide-payback" element={<GuidePayback />} />
             <Route path="/algorithm-free" element={<FreeAlgorithmPage />} />
             <Route path="/algorithm-weekly" element={<WeeklyAlgorithmPage />} />
-            <Route path="/guide-payback" element={<GuidePayback />} />
+            <Route path="/posting-monthly" element={<MonthlyPostingPage />} />
           </Routes>
         </main>
       </div>
