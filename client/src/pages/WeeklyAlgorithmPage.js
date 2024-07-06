@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import AlgorithmService from '../services/algorithmService';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -55,7 +56,7 @@ function WeeklyAlgorithmPage() {
               <thead style={{ position: 'sticky', top: 0, backgroundColor: '#fff', zIndex: 1 }}>
                 <tr>
                   <th className="col-1" style={{ width: '60px' }}>티어</th>
-                  <th className="col-5" style={{ width: 'auto' }}>상태</th>
+                  <th className="col-5" style={{ width: 'auto' }}>문제</th>
                   <th className="col-2" style={{ width: '80px' }}>제출자</th>
                   <th className="col-2" style={{ width: '80px' }}>메모리</th>
                   <th className="col-2" style={{ width: '80px' }}>수행시간</th>
@@ -65,7 +66,7 @@ function WeeklyAlgorithmPage() {
               <tbody style={{ fontSize: "13px" }}>
                 {problems.map((problem, index) => (
                   <tr className='align-middle' key={index}>
-                    <td><img height="35"
+                    <td className='align-top'><img height="25"
                       style={{
                         borderRadius: '3px'
                       }}
@@ -77,8 +78,10 @@ function WeeklyAlgorithmPage() {
                         color: "rgb(0, 159, 107)",
                       }}
                         href={`https://www.acmicpc.net/problem/${problem.prob_no}`} target="_blank">{problem.prob_no} {problem.prob_title}</a> </h6>
+                                 
+                                 <span className='text-muted'>{`${moment(problem.st_dt).format('YY년 MM월 DD일')} ~ ${moment(problem.end_dt).format('YY년 MM월 DD일')}`}</span>
                     </td>
-                    <td>
+                    <td> 
                       {problem.submitter_image && (
                         <img
                           height="28"
