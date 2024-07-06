@@ -48,7 +48,7 @@ function WeeklyAlgorithmPage() {
         <h3>주간 알고리즘</h3>
         <button className="btn btn-sm btn-primary" onClick={handleCardClick}>데이터 갱신</button>
       </div>
-      <div className="row content" style={{ height: '100%', width: '100%' }}>
+      <div className="row content"  style={{ height: "calc(100vh - 150px)" }}>
         <PerfectScrollbar>
           <div style={{ height: 'calc(100vh - 64px)' }}>
             <table className="table">
@@ -56,10 +56,10 @@ function WeeklyAlgorithmPage() {
                 <tr>
                   <th className="col-1" style={{ width: '60px' }}>티어</th>
                   <th className="col-5" style={{ width: 'auto' }}>상태</th>
-                  <th className="col-2" style={{ width: '200px' }}>제출자</th>
-                  <th className="col-2" style={{ width: '100px' }}>메모리</th>
-                  <th className="col-2" style={{ width: '100px' }}>수행시간</th>
-                  <th className="col-2" style={{ width: '100px' }}>코드길이</th>
+                  <th className="col-2" style={{ width: '80px' }}>제출자</th>
+                  <th className="col-2" style={{ width: '80px' }}>메모리</th>
+                  <th className="col-2" style={{ width: '80px' }}>수행시간</th>
+                  <th className="col-2" style={{ width: '80px' }}>코드길이</th>
                 </tr>
               </thead>
               <tbody style={{ fontSize: "13px" }}>
