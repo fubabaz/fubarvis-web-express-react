@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import AlgorithmService from "../services/algorithmService";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -28,16 +28,68 @@ function FreeAlgorithmPage() {
     problems: ""
   });
 
+  const [chartStatus, setChartStatus] = useState('loading');
+  const chartRef = useRef(null);
+
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://public.flourish.studio/resources/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const loadFlourishScript = () => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://public.flourish.studio/resources/embed.js';
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    };
+
+    const initializeChart = () => {
+      if (typeof window.Flourish === 'undefined') {
+        throw new Error('Flourish is not defined');
+      }
+      return new Promise((resolve, reject) => {
+        try {
+          window.Flourish.embed(
+            { src: 'visualisation/11965768', container: chartRef.current },
+            (embed) => resolve(embed)
+          );
+        } catch (error) {
+          reject(error);
+        }
+      });
+    };
+
+    const embedFallbackIframe = () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://flo.uri.sh/visualisation/11965768/embed';
+      iframe.width = '100%';
+      iframe.height = '300';
+      iframe.style.border = 'none';
+      chartRef.current.innerHTML = '';
+      chartRef.current.appendChild(iframe);
+    };
+
+    const setupChart = async () => {
+      try {
+        await loadFlourishScript();
+        console.log('Flourish script loaded successfully');
+        await initializeChart();
+        console.log('Flourish chart initialized successfully');
+        setChartStatus('loaded');
+      } catch (error) {
+        console.error('Error in chart setup:', error);
+        embedFallbackIframe();
+        setChartStatus('fallback');
+      }
+    };
+
+    setupChart();
 
     return () => {
-      document.body.removeChild(script);
+      // Cleanup logic if needed
     };
   }, []);
+
 
   const updateData = async () => {
     try {
@@ -140,7 +192,7 @@ function FreeAlgorithmPage() {
           style={{ height: "calc(100vh - 90px)", overflow: "hidden" }}
         >
           <div
-            className="card-body shadow-sm p-4"
+            className="card-body shadow-sm px-4 pt-3"
             style={{
               border: "1px solid #f7f7f7",
               borderRadius: "2px",
@@ -151,6 +203,7 @@ function FreeAlgorithmPage() {
           >
             {selectedUser && (
               <div className="row">
+
                 <div className="col-5">
                   <img
                     style={{
@@ -196,6 +249,11 @@ function FreeAlgorithmPage() {
                     </div>
                   </div>
                 )}
+
+
+                <div
+                  ref={chartRef}
+                />
               </div>
             )}
 
