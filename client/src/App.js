@@ -1,67 +1,113 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-import './App.css';
-import MemberProfilePage from './pages/MemberProfilePage';
-import FreeAlgorithmPage from './pages/FreeAlgorithmPage';
-import WeeklyAlgorithmPage from './pages/WeeklyAlgorithmPage';
-import MonthlyPostingPage from './pages/MonthlyPostingPage';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  NavLink,
+} from "react-router-dom";
+import "./App.css";
+import MemberProfilePage from "./pages/MemberProfilePage";
+import FreeAlgorithmPage from "./pages/FreeAlgorithmPage";
+import WeeklyAlgorithmPage from "./pages/WeeklyAlgorithmPage";
+import MonthlyPostingPage from "./pages/MonthlyPostingPage";
+import githubLogo from "./assets/img/logo/github-logo.png";
+import GuidePayback from "./pages/GuidePayback";
 
-import GuidePayback from './pages/GuidePayback';
+const App = () => {
+  const sidebarLinks = [
+    { to: "/member-profile", label: "멤버프로필" },
+    { to: "/guide-payback", label: "페이백안내" },
+  ];
 
-function App() {
+  const activityLinks = [
+    { to: "/algorithm-free", label: "자유알고리즘" },
+    { to: "/algorithm-weekly", label: "주간알고리즘" },
+    { to: "/posting-monthly", label: "월간포스팅" },
+    { to: "#", label: "프로필매치업", disabled: true },
+  ];
+
+  const projectLinks = [
+    {
+      href: "https://github.com/fubabaz/fubarvis-web-express-react",
+      label: "fubarvis-web-express-react",
+      external: true,
+    },
+    { to: "#", label: "fubarvis-slack-bot", disabled: true },
+  ];
+
+  const linkStyle = (isActive) => (isActive ? "active" : "");
+  const disabledLinkStyle = { color: "#cfcfcf" };
+
   return (
     <Router>
       <div className="container">
-        {/* 사이드바 */}
         <nav className="sidebar">
           <div className="logo-container">
-            <img src="https://avatars.githubusercontent.com/u/28587109?s=200&v=4" alt="Logo" className="logo" />
+            <img
+              src="https://avatars.githubusercontent.com/u/28587109?s=200&v=4"
+              alt="Logo"
+              className="logo"
+            />
           </div>
 
           <ul>
-            <li>
-              <NavLink to="/member-profile" className={({ isActive }) => isActive ? "active" : ""}>맴버프로필</NavLink>
-            </li>
-            <li>
-              <NavLink to="/guide-payback" className={({ isActive }) => isActive ? "active" : ""}>페이백안내</NavLink>
-            </li>
+            {sidebarLinks.map((link) => (
+              <li key={link.to}>
+                <NavLink to={link.to} className={({ isActive }) => linkStyle(isActive)}>
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
+
           <div className="hr-container">
             <small className="text-start text-muted">활동</small>
-            <hr className='my-1' />
+            <hr className="my-1" />
           </div>
+
           <ul>
-            <li>
-              <NavLink to="/algorithm-free" className={({ isActive }) => isActive ? "active" : ""}>자유알고리즘</NavLink>
-            </li>
-            <li>
-              <NavLink to="/algorithm-weekly" className={({ isActive }) => isActive ? "active" : ""}>주간알고리즘</NavLink>
-            </li>
-            <li>
-            <NavLink to="/posting-monthly" className={({ isActive }) => isActive ? "active" : ""}>월간포스팅</NavLink>
-            </li>
-            <li>
-              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>프로필매치업</NavLink>
-            </li>
+            {activityLinks.map((link) => (
+              <li key={link.to}>
+                {link.disabled ? (
+                  <NavLink to={link.to} className="disabled" style={disabledLinkStyle}>
+                    {link.label}
+                  </NavLink>
+                ) : (
+                  <NavLink to={link.to} className={({ isActive }) => linkStyle(isActive)}>
+                    {link.label}
+                  </NavLink>
+                )}
+              </li>
+            ))}
           </ul>
 
           <div className="hr-container">
             <small className="text-start text-muted">토이프로젝트</small>
-            <hr className='my-1' />
+            <hr className="my-1" />
           </div>
+
           <ul>
-            <li>
-              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>fubarvis-web-express-react
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="#" className="disabled" style={{ color: '#cfcfcf' }}>fubarvis-slack-bot
-              </NavLink>
-            </li>
+            {projectLinks.map((link) => (
+              <li key={link.label}>
+                <img
+                  height="15"
+                  width="15"
+                  src={githubLogo}
+                />
+                {link.external ? (
+                  <a href={link.href} target="_blank" className="ms-1 fw-normal text-success">
+                    <small>{link.label}</small>
+                  </a>
+                ) : (
+                  <NavLink to={link.to} className="ms-1 disabled fw-normal text-muted">
+                    <small>{link.label}</small>
+                  </NavLink>
+                )}
+              </li>
+            ))}
           </ul>
         </nav>
 
-        {/* 메인 콘텐츠 */}
         <main className="w-100">
           <Routes>
             <Route path="/" element={<MemberProfilePage />} />
@@ -75,6 +121,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
