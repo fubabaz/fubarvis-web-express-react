@@ -7,6 +7,9 @@ import b2enLogo from "../assets/img/logo/b2en-logo.svg";
 import problemss from "../data/problems-group.json";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 import individual from "../data/problems-individual-info.json";
 
@@ -101,6 +104,36 @@ function FreeAlgorithmPage() {
     }
   };
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body style={{
+        width: 'auto',
+        backgroundColor: '#f8f9fa',
+        padding: '15px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        color: '#333',
+        fontSize: '13px',
+        lineHeight: '1.2'
+      }}>
+        <div style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+          각자 백준 온라인 저지에서
+        </div>
+        풀고 싶은 문제를 자유롭게 풀어 주세요! 아주 쉽고 의미 없는 문제도 상관없어요.
+        <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
+          활동의 목표는
+        </div>
+        첫 번째, 개인 랭킹의 상승이고 두 번째, 비투엔의 월별 목표 랭킹 달성이에요.
+        <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
+          자유가 높은 활동이지만
+        </div>
+        첫 번째 개인 활동 결과에 의해, 두 번째 공동의 결과가 정해지기 때문에, 자발적고 자유롭지만 책임감이 있는 활동 참여가 중요합니다 😊
+      </Popover.Body>
+    </Popover>
+  );
+  
+
+
   const handleCardClick = (data, index) => {
     setSelectedIndex(index);
     setSelectedUser(data);
@@ -120,8 +153,16 @@ function FreeAlgorithmPage() {
 
   return (
     <div>
-      <div className="m-4 d-flex justify-content-between align-items-center">
-        <h3>자유알고리즘</h3>
+     <div className="m-4 d-flex justify-content-between align-items-center">
+        <h3 className="d-flex align-items-center">
+          자유알고리즘
+          <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={popover}>
+            <FontAwesomeIcon 
+              icon={faQuestionCircle} 
+              style={{ marginLeft: '10px', cursor: 'pointer' }} 
+            />
+          </OverlayTrigger>
+        </h3>
         <button className="btn btn-sm btn-primary" onClick={updateData}>데이터 갱신</button>
       </div>
       <div className="row content">
