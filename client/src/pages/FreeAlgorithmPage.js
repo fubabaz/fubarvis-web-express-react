@@ -294,7 +294,7 @@ function FreeAlgorithmPage() {
               </div>
             )}
 
-            <PerfectScrollbar style={{ height: "calc(100% - 60px)" }}>
+            <PerfectScrollbar style={{ height: "calc(100% - 430px)" }}>
               <table className="table">
                 <tbody style={{ fontSize: "13px" }}>
                   {(filterData || problemss).map((problem, index) => (
