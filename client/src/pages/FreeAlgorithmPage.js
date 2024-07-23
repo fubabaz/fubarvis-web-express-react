@@ -14,7 +14,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import individual from "../data/problems-individual-info.json";
 
 function FreeAlgorithmPage() {
-  const [selectedProblems, setSelectedProblems] = useState([]);
+  const chartRef = useRef(null);
   const [filterData, setFilterData] = useState(problemss);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedUser, setSelectedUser] = useState({
@@ -31,8 +31,8 @@ function FreeAlgorithmPage() {
     problems: ""
   });
 
-  const [chartStatus, setChartStatus] = useState('loading');
-  const chartRef = useRef(null);
+  //const [chartStatus, setChartStatus] = useState('loading');
+  
 
   useEffect(() => {
     const loadFlourishScript = () => {
@@ -75,21 +75,17 @@ function FreeAlgorithmPage() {
     const setupChart = async () => {
       try {
         await loadFlourishScript();
-        console.log('Flourish script loaded successfully');
         await initializeChart();
-        console.log('Flourish chart initialized successfully');
-        setChartStatus('loaded');
       } catch (error) {
         console.error('Error in chart setup:', error);
         embedFallbackIframe();
-        setChartStatus('fallback');
       }
     };
 
     setupChart();
 
     return () => {
-      // Cleanup logic if needed
+    
     };
   }, []);
 
@@ -143,10 +139,7 @@ function FreeAlgorithmPage() {
         individualData.includes(problem.prob_no)
       );
       setFilterData(filtered);
-      setSelectedProblems(individualData);
-
     } else {
-      setSelectedProblems([]);
       setFilterData([]);
     }
   };
@@ -196,6 +189,7 @@ function FreeAlgorithmPage() {
                       height="28"
                       width="28"
                       src={data.image}
+                      alt='Avatar'
                       className="rounded"
                     />
                     <img
@@ -215,6 +209,7 @@ function FreeAlgorithmPage() {
                   <img
                     className="me-1"
                     src={baekjoonLogo}
+                    alt="Baekjoon Logo"
                     style={{
                       width: "20px",
                       borderRadius: "3px",
@@ -253,6 +248,7 @@ function FreeAlgorithmPage() {
                       cursor: "pointer",
                     }}
                     src={selectedUser.image}
+                     alt="Avatar"
                     className="rounded user-avatar"
                   />
                   {selectedIndex !== null && (
@@ -298,7 +294,7 @@ function FreeAlgorithmPage() {
               </div>
             )}
 
-            <PerfectScrollbar style={{ height: "calc(100% - 60px)" }}>
+            <PerfectScrollbar style={{ height: "calc(100% - 430px)" }}>
               <table className="table">
                 <tbody style={{ fontSize: "13px" }}>
                   {(filterData || problemss).map((problem, index) => (
@@ -318,14 +314,21 @@ function FreeAlgorithmPage() {
                         </a>
                       </td>
                       <td className="d-flex">
-                        {problem.ids.split(" ").map((id, idx) => (
-                          <div key={idx}>
-                            <img
-                              height="20"
-                              width="20"
+                        {problem.ids.split(" ")
+                         .sort((a, b) => {
+                          if (a === selectedUser.image) return -1;
+                          if (b === selectedUser.image) return 1;
+                          return 0;
+                        })
+                        .map((id, idx) => (
+                          <div key={idx}
+                          className={selectedUser.image === id ? 'me-5' : ''}
+                          ><img
+                              height={selectedUser.image === id ? "35" : "20"}
+                              width={selectedUser.image === id ? "35" : "20"}
                               src={id}
+                              alt="Avatar"
                               className="me-2 rounded-circle user-avatar"
-                              alt="User Avatar"
                             />
                           </div>
                         ))}
