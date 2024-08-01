@@ -12,6 +12,7 @@ import WeeklyAlgorithmPage from "./pages/WeeklyAlgorithmPage";
 import MonthlyPostingPage from "./pages/MonthlyPostingPage";
 import githubLogo from "./assets/img/logo/github-logo.png";
 import GuidePayback from "./pages/GuidePayback";
+import ToyProjectPage from './pages/ToyProjectPage';
 
 const App = () => {
   const sidebarLinks = [
@@ -24,6 +25,7 @@ const App = () => {
     { to: "/algorithm-weekly", label: "주간알고리즘" },
     { to: "/posting-monthly", label: "월간포스팅" },
     { to: "#", label: "프로필매치업", disabled: true },
+    { to: "/toy-project", label: "토이프로젝트" },
   ];
 
   const projectLinks = [
@@ -81,31 +83,6 @@ const App = () => {
             ))}
           </ul>
 
-          <div className="hr-container">
-            <small className="text-start text-muted">토이프로젝트</small>
-            <hr className="my-1" />
-          </div>
-
-          <ul>
-            {projectLinks.map((link) => (
-              <li key={link.label}>
-                <img
-                  height="15"
-                  width="15"
-                  src={githubLogo}
-                />
-                {link.external ? (
-                  <a href={link.href} target="_blank" className="ms-1 fw-normal text-success">
-                    <small>{link.label}</small>
-                  </a>
-                ) : (
-                  <NavLink to={link.to} className="ms-1 disabled fw-normal text-muted">
-                    <small>{link.label}</small>
-                  </NavLink>
-                )}
-              </li>
-            ))}
-          </ul>
         </nav>
 
         <main className="w-100">
@@ -116,6 +93,7 @@ const App = () => {
             <Route path="/algorithm-free" element={<FreeAlgorithmPage />} />
             <Route path="/algorithm-weekly" element={<WeeklyAlgorithmPage />} />
             <Route path="/posting-monthly" element={<MonthlyPostingPage />} />
+            <Route path="/toy-project" element={<ToyProjectPage />} />
           </Routes>
         </main>
       </div>

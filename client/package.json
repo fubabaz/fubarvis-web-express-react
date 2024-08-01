@@ -17,6 +17,7 @@
     "react-github-calendar": "^4.1.5",
     "react-github-profile": "^0.2.2",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-repo-card": "^2.0.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
