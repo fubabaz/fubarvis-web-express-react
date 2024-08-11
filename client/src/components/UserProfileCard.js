@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import GitHubCalendar from "react-github-calendar";
-import { Modal, Button } from "react-bootstrap";
 import TrophyModal from "./modal/TrophyModal";
 
 import baekjoonLogo from "../assets/img/logo/baekjoon-logo.png";
@@ -55,6 +53,71 @@ const UserProfileCard = ({ user, col }) => {
             )}
           </div>
 
+          <hr style={{ color: "#c4c4c4" }}></hr>
+          <div className="mt-4 row text-center">
+            <div className="col">
+              <p className="card-text mb-1" style={{ fontSize: "13px" }}>
+                <img
+                  src={baekjoonLogo}
+                  style={{
+                    width: "20px",
+                    borderRadius: "3px",
+                  }}
+                />
+              </p>
+              <p>
+                <small>
+                <b className="text-muted">
+                  {user.ranking.toLocaleString()}
+                </b>
+                </small>
+              </p>
+            </div>
+            <div className="col">
+              <p className="card-text mb-1" style={{ fontSize: "13px" }}>
+                <img
+                  src={solvedLogo}
+                  style={{
+                    width: "20px",
+                    borderRadius: "3px",
+                  }}
+                />
+              </p>
+              <p>
+                <small>
+                  <b className="text-muted">
+                  {user.lev} {user.ac_rating.toLocaleString()}
+                </b>
+                </small>
+              </p>
+            </div>
+            <div className="col">
+              <p className="card-text mb-1" style={{ fontSize: "13px" }}>
+                <img
+                  src={tistoryLogo}
+                  style={{
+                    width: "20px",
+                    borderRadius: "3px",
+                  }}
+                />
+              </p>
+              <p>
+              <small>
+                <b className="text-muted">{user.posting_cnt}</b>
+                </small>
+              </p>
+
+            </div>
+          </div>
+
+          <p className="card-text mb-1" style={{ fontSize: "13px" }}>
+            <small className="text-muted">{user.joinedDate}</small>
+          </p>
+
+
+
+          <hr style={{ color: "#c4c4c4" }}></hr>
+
           <GitHubCalendar
             hideMonthLabels={true}
             hideTotalCount={false}
@@ -78,47 +141,6 @@ const UserProfileCard = ({ user, col }) => {
               className="cropped-image"
             />
           </div>
-          <hr style={{ color: "#c4c4c4" }}></hr>
-          <p className="card-text mb-1" style={{ fontSize: "13px" }}>
-            <small className="text-muted">{user.joinedDate}</small>
-          </p>
-          <p className="card-text mb-1" style={{ fontSize: "13px" }}>
-            <img
-              src={baekjoonLogo}
-              style={{
-                width: "20px",
-                borderRadius: "3px",
-                marginRight: "10px",
-              }}
-            />
-            <small className="text-muted">
-              {user.ranking.toLocaleString()}
-            </small>
-          </p>
-          <p className="card-text mb-1" style={{ fontSize: "13px" }}>
-            <img
-              src={solvedLogo}
-              style={{
-                width: "20px",
-                borderRadius: "3px",
-                marginRight: "10px",
-              }}
-            />
-            <small className="text-muted">
-              {user.lev} {user.ac_rating.toLocaleString()}
-            </small>
-          </p>
-          <p className="card-text mb-1" style={{ fontSize: "13px" }}>
-            <img
-              src={tistoryLogo}
-              style={{
-                width: "20px",
-                borderRadius: "3px",
-                marginRight: "10px",
-              }}
-            />
-            <small className="text-muted">{user.posting_cnt}건</small>
-          </p>
         </div>
       </div>
 
@@ -133,15 +155,5 @@ const UserProfileCard = ({ user, col }) => {
     </>
   );
 };
-/*
-UserProfileCard.propTypes = {
-  user: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    bio: PropTypes.string,
-    joinedDate: PropTypes.string.isRequired,
-  }).isRequired,
-};
-*/
 
 export default UserProfileCard;
